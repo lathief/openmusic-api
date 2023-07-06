@@ -30,7 +30,7 @@ exports.up = (pgm) => {
     },
     albumid: {
       type: 'VARCHAR(50)',
-      notNull: true,
+      notNull: false,
     },
     created_at: {
       type: 'TEXT',

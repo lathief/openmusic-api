@@ -1,6 +1,10 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable camelcase */
-
+const albumGetDetail= ({ id, name, year }) => ({
+  id,
+  name,
+  year,
+});
 const mapGetAll = ({ id, title, performer }) => ({
   id,
   title,
@@ -27,4 +31,4 @@ const mapGetDetail = ({
   updatedAt: updated_at,
 });
 
-module.exports = { mapGetAll, mapGetDetail };
+module.exports = { albumGetDetail, mapGetAll, mapGetDetail };
