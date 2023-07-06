@@ -8,7 +8,36 @@ class AlbumsHandler {
 
   async getAlbumByIdHandler(request, h) {
     const { id } = request.params;
-    const album = await this.albumsService.getAlbumById(id);
+    const result = await this.albumsService.getAlbumById(id);
+    const datas = result.rows;
+    let album;
+    const dataResponse = {
+      id: datas[0].album_id,
+      name: datas[0].name,
+      year: datas[0].year,
+      songs: [],
+    };
+
+    if (datas[0].id === null) {
+      album = {
+        ...dataResponse,
+      };
+    } else {
+      datas.map((data) => {
+        if (data.song_id) {
+          dataResponse.songs.push({
+            id: data.song_id,
+            title: data.title,
+            performer: data.performer,
+          });
+        }
+      });
+
+      album = {
+        ...dataResponse,
+      };
+    }
+
     return {
       status: 'success',
       data: {
@@ -16,6 +45,7 @@ class AlbumsHandler {
       },
     };
   }
+
 
   async postAlbumHandler(request, h) {
     this.albumsValidator.validatorAlbumPayload(request.payload);

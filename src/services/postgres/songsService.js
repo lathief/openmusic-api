@@ -21,7 +21,6 @@ class SongsService {
     const id = `song-${nanoid(16)}`;
     const insertedAt = new Date().toISOString();
     const updatedAt = insertedAt;
-
     const query = {
       text: 'INSERT INTO songs VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id',
       values: [id, title, year, performer, genre, duration, albumId, insertedAt, updatedAt],
@@ -35,8 +34,22 @@ class SongsService {
     return result.rows[0].id;
   }
 
-  async getSongs() {
-    const result = await this.pgPool.query('SELECT * FROM songs');
+  async getSongs(title, performer) {
+    let query = "SELECT id, title, performer FROM songs";
+    const values = [];
+
+    if (title && performer) {
+      query += " WHERE title ILIKE $1 AND performer ILIKE $2";
+      values.push(`%${title}%`, `%${performer}%`);
+    } else if (title) {
+      query += " WHERE title ILIKE $1";
+      values.push(`%${title}%`);
+    } else if (performer) {
+      query += " WHERE performer ILIKE $1";
+      values.push(`%${performer}%`);
+    }
+
+    const result = await this.pgPool.query(query, values);
     return result.rows.map(mapGetAll);
   }
 

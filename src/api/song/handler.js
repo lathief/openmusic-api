@@ -7,10 +7,12 @@ class SongsHandler {
     autoBind(this);
   }
 
-  async getSongsHandler() {
-    const songs = await this.songsService.getSongs();
+  async getSongsHandler(request) {
+    const {title} = request.query;
+    const {performer} = request.query;
+    const songs = await this.songsService.getSongs(title, performer);
     return {
-      status: 'success',
+      status: "success",
       data: {
         songs,
       },
@@ -32,10 +34,10 @@ class SongsHandler {
 
     this.songsValidator.validatorSongPayload(request.payload);
     const {
-      title = 'untitled', year, performer, genre, duration, albumid,
+      title = 'untitled', year, performer, genre, duration, albumId,
     } = request.payload;
     const songId = await this.songsService.addSong({
-      title, year, performer, genre, duration, albumid,
+      title, year, performer, genre, duration, albumId,
     });
 
     const response = h.response({
