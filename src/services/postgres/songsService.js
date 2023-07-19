@@ -35,17 +35,17 @@ class SongsService {
   }
 
   async getSongs(title, performer) {
-    let query = "SELECT id, title, performer FROM songs";
+    let query = 'SELECT id, title, performer FROM songs';
     const values = [];
 
     if (title && performer) {
-      query += " WHERE title ILIKE $1 AND performer ILIKE $2";
+      query += ' WHERE title ILIKE $1 AND performer ILIKE $2';
       values.push(`%${title}%`, `%${performer}%`);
     } else if (title) {
-      query += " WHERE title ILIKE $1";
+      query += ' WHERE title ILIKE $1';
       values.push(`%${title}%`);
     } else if (performer) {
-      query += " WHERE performer ILIKE $1";
+      query += ' WHERE performer ILIKE $1';
       values.push(`%${performer}%`);
     }
 

@@ -1,6 +1,6 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable camelcase */
-const albumGetDetail= ({ id, name, year }) => ({
+const albumGetDetail = ({ id, name, year }) => ({
   id,
   name,
   year,
