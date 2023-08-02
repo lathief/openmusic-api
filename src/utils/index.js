@@ -30,5 +30,9 @@ const mapGetDetail = ({
   insertedAt: inserted_at,
   updatedAt: updated_at,
 });
-
-module.exports = { albumGetDetail, mapGetAll, mapGetDetail };
+const mapPlaylists = ({ id, name, owner }) => ({
+  id,
+  name,
+  username: owner,
+});
+module.exports = { albumGetDetail, mapGetAll, mapGetDetail, mapPlaylists };
