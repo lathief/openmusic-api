@@ -16,6 +16,7 @@ class AlbumsHandler {
       id: datas[0].album_id,
       name: datas[0].name,
       year: datas[0].year,
+      coverUrl: datas[0].cover_url,
       songs: [],
     };
 
