@@ -1,5 +1,4 @@
 const { Pool } = require('pg');
-// eslint-disable-next-line import/no-extraneous-dependencies
 const { nanoid } = require('nanoid');
 const InvariantError = require('../../exception/invariant-error');
 const { mapGetAll, mapGetDetail } = require('../../utils');

@@ -1,5 +1,4 @@
 const { Pool } = require('pg');
-// eslint-disable-next-line import/no-extraneous-dependencies
 const { nanoid } = require('nanoid');
 const InvariantError = require('../../exception/invariant-error');
 const NotFoundError = require('../../exception/not-found-error');
@@ -36,6 +35,7 @@ class AlbumsService {
       albums.id AS album_id, 
       albums.name, 
       albums.year,
+      albums.cover_url,
       songs.id AS song_id, 
       songs.title, 
       songs.performer
